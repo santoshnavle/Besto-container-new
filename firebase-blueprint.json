@@ -1,0 +1,66 @@
+{
+  "entities": {
+    "BlogPost": {
+      "title": "BlogPost",
+      "description": "Represents an industrial packaging blog article",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 300 },
+        "slug": { "type": "string", "maxLength": 200, "pattern": "^[a-z0-9-]+$" },
+        "excerpt": { "type": "string", "maxLength": 1000 },
+        "content": { "type": "string", "maxLength": 50000 },
+        "coverImageUrl": { "type": "string", "maxLength": 2000 },
+        "imageAlt": { "type": "string", "maxLength": 300 },
+        "category": { "type": "string", "maxLength": 100 },
+        "tags": { "type": "string", "maxLength": 500 },
+        "author": { "type": "string", "maxLength": 100 },
+        "authorEmail": { "type": "string", "maxLength": 200 },
+        "seoTitle": { "type": "string", "maxLength": 200 },
+        "seoDescription": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["draft", "published"] },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "content", "status", "category"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Represents a blog category for industrial packaging insights",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100, "pattern": "^[a-z0-9-]+$" },
+        "description": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Represents an authorized administrator account for the blog management system",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 200 },
+        "role": { "type": "string", "enum": ["admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/blog_posts/{postId}": {
+      "schema": "BlogPost",
+      "description": "Collection of published and draft articles"
+    },
+    "/blog_categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Collection of blog categories"
+    },
+    "/admins/{uid}": {
+      "schema": "AdminUser",
+      "description": "Designated administrator credentials"
+    }
+  }
+}

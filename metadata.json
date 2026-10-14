@@ -1,0 +1,6 @@
+{
+  "name": "Besto Container Industries",
+  "description": "B2B industrial packaging solutions, refurbished and reconditioned barrels, drums, IBCs, and new industrial containers under the BESTOSIA® brand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

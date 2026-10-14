@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email == 'santoshnavle2010@gmail.com' && request.auth.token.email_verified == true) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidPost(data) {
+      return data.keys().hasAll(['title', 'slug', 'content', 'status', 'category'])
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 300
+        && data.slug is string && data.slug.size() > 0 && data.slug.size() <= 200 && data.slug.matches('^[a-z0-9-]+$')
+        && data.content is string && data.content.size() > 0 && data.content.size() <= 50000
+        && data.status in ['draft', 'published']
+        && data.category is string && data.category.size() > 0 && data.category.size() <= 100
+        && (!('excerpt' in data) || (data.excerpt is string && data.excerpt.size() <= 1000))
+        && (!('coverImageUrl' in data) || (data.coverImageUrl is string && data.coverImageUrl.size() <= 2000))
+        && (!('imageAlt' in data) || (data.imageAlt is string && data.imageAlt.size() <= 300))
+        && (!('tags' in data) || (data.tags is string && data.tags.size() <= 500))
+        && (!('author' in data) || (data.author is string && data.author.size() <= 100))
+        && (!('authorEmail' in data) || (data.authorEmail is string && data.authorEmail.size() <= 200))
+        && (!('seoTitle' in data) || (data.seoTitle is string && data.seoTitle.size() <= 200))
+        && (!('seoDescription' in data) || (data.seoDescription is string && data.seoDescription.size() <= 500));
+    }
+
+    function isValidCategory(data) {
+      return data.keys().hasAll(['name', 'slug'])
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.slug is string && data.slug.size() > 0 && data.slug.size() <= 100 && data.slug.matches('^[a-z0-9-]+$')
+        && (!('description' in data) || (data.description is string && data.description.size() <= 500))
+        && (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 100))
+        && (!('updatedAt' in data) || (data.updatedAt is string && data.updatedAt.size() <= 100));
+    }
+
+    // 1. Blog Posts Collection
+    match /blog_posts/{postId} {
+      allow get: if isValidId(postId) && (resource.data.status == 'published' || isAdmin());
+      allow list: if resource.data.status == 'published' || isAdmin();
+      allow create: if isValidId(postId) && isAdmin() && isValidPost(request.resource.data);
+      allow update: if isValidId(postId) && isAdmin() && isValidPost(request.resource.data);
+      allow delete: if isValidId(postId) && isAdmin();
+    }
+
+    // 2. Blog Categories Collection
+    match /blog_categories/{categoryId} {
+      allow read: if true;
+      allow create: if isValidId(categoryId) && isAdmin() && isValidCategory(request.resource.data);
+      allow update: if isValidId(categoryId) && isAdmin() && isValidCategory(request.resource.data);
+      allow delete: if isValidId(categoryId) && isAdmin();
+    }
+
+    // 3. Admins Registry Collection
+    match /admins/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

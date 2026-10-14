@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Official Besto Container Industries Brand Tokens */
+    --color-primary: #F15A24;         /* Vibrant Orange sampled from logo */
+    --color-primary-hover: #D94814;   /* Deep Orange hover state */
+    --color-primary-active: #BF360C;  /* Active click state */
+    --color-primary-light: #FFF7ED;   /* Warm light tint (orange-50) */
+    --color-primary-border: #FDBA74;  /* Border accent (orange-300) */
+
+    --color-accent: #F7941D;          /* Warm Yellow-Orange sampled from logo */
+    --color-accent-hover: #DE7E0D;    /* Amber hover */
+    --color-accent-light: #FEF3C7;    /* Warm accent light tint */
+
+    --color-dark: #121212;            /* Rich Industrial Black from logo */
+    --color-dark-surface: #1E1E1E;    /* Dark container surface */
+    --color-dark-muted: #27272A;      /* Charcoal borders & dividers */
+    --color-dark-subtle: #3F3F46;     /* Muted dark borders */
+
+    --color-body: #334155;            /* Slate-700 body text for optimal contrast */
+    --color-body-muted: #64748B;      /* Slate-500 secondary text */
+    --color-white: #FFFFFF;           /* Pure white */
+    --color-surface-bg: #F8FAFC;      /* Light background surface */
+
+    --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    color: var(--color-body);
+    background-color: #FFFFFF;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  body {
+    font-size: 1rem; /* 16px desktop body */
+    line-height: 1.65;
+    color: #334155;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+    color: inherit;
+  }
+
+  /* Dark headers, dark containers, and dark banners high-contrast headings */
+  .bg-slate-900 h1, .bg-slate-900 h2, .bg-slate-900 h3, .bg-slate-900 h4,
+  .bg-slate-950 h1, .bg-slate-950 h2, .bg-slate-950 h3, .bg-slate-950 h4,
+  header.bg-slate-900 h1, header.bg-slate-900 h2, header.bg-slate-900 h3,
+  .bg-black h1, .bg-black h2, .bg-black h3,
+  .bg-neutral-900 h1, .bg-neutral-900 h2,
+  .dark h1, .dark h2, .dark h3 {
+    color: #FFFFFF;
+  }
+
+  /* Requirement 6: Standard Hand Pointer cursor on all clickable elements */
+  button, 
+  a, 
+  [role="button"], 
+  input[type="button"], 
+  input[type="submit"], 
+  input[type="reset"],
+  select, 
+  summary {
+    cursor: pointer !important;
+  }
+}
+
+/* Ensure focus visibility for keyboard navigation with brand primary orange */
+:focus-visible {
+  outline: 2px solid #F15A24;
+  outline-offset: 2px;
+}
+
+/* Custom selection */
+::selection {
+  background-color: #F15A24;
+  color: #FFFFFF;
+}

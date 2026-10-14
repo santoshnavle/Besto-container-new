@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 104" width="100%" height="100%">
+  <defs>
+    <!-- Official orange-yellow gradient sampled directly from uploaded logo -->
+    <linearGradient id="bestoOrangeGrad" x1="25%" y1="2%" x2="95%" y2="85%">
+      <stop offset="0%" stop-color="#FFA118" />
+      <stop offset="30%" stop-color="#F88212" />
+      <stop offset="70%" stop-color="#F15A24" />
+      <stop offset="100%" stop-color="#E64A19" />
+    </linearGradient>
+
+    <!-- BESTO Wordmark warm gradient with subtle vertical highlight -->
+    <linearGradient id="bestoWordmarkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFA62A" />
+      <stop offset="40%" stop-color="#F98014" />
+      <stop offset="100%" stop-color="#EB5424" />
+    </linearGradient>
+  </defs>
+
+  <!-- EMBLEM -->
+  <g id="official-besto-emblem">
+    <!-- 1. Left Black Stem with rounded top-left corner, lower sweep hook, and pointer -->
+    <path
+      d="M 23 8
+         C 15 8 9 14 9 23
+         L 9 58
+         C 9 68 16 75 29 75
+         C 19 72 15 64 15 55
+         L 15 48
+         L 38 44.5
+         L 15 41
+         L 15 23
+         C 15 18 18 15 24 15
+         Z"
+      fill="#0A0A0B"
+    />
+
+    <!-- 2. Central Solid Black Disc -->
+    <circle cx="51" cy="44.5" r="14.5" fill="#0A0A0B" />
+
+    <!-- 3. Triangular bridge connecting left pillar into center disc -->
+    <polygon points="15,37 44,44.5 15,52" fill="#0A0A0B" />
+
+    <!-- 4. Orange Outer Arch -->
+    <path
+      d="M 39 8
+         L 76 8
+         C 89 8 95 15 95 27
+         L 95 58
+         C 95 68 88 75 75 75
+         C 85 72 89 64 89 55
+         L 89 27
+         C 89 18 84 14 75 14
+         L 39 14
+         Z"
+      fill="url(#bestoOrangeGrad)"
+    />
+  </g>
+
+  <!-- WORDMARK: BESTO in vector paths -->
+  <g id="official-besto-wordmark" fill="url(#bestoWordmarkGrad)">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M 7,80 L 15,80 C 19,80 21,81.5 21,84.5 C 21,86.5 19.5,87.5 17.5,88 C 20,88.5 21.5,90 21.5,92.5 C 21.5,95.5 19,96 15,96 L 7,96 Z M 11,83 L 11,86.5 L 14.5,86.5 C 16,86.5 17,86 17,84.8 C 17,83.6 16,83 14.5,83 Z M 11,89.5 L 11,93 L 15,93 C 16.5,93 17.5,92.4 17.5,91.2 C 17.5,90 16.5,89.5 15,89.5 Z"
+    />
+    <path d="M 25,80 L 39,80 L 39,83.5 L 29.5,83.5 L 29.5,86.2 L 37.5,86.2 L 37.5,89.5 L 29.5,89.5 L 29.5,92.5 L 39,92.5 L 39,96 L 25,96 Z" />
+    <path d="M 44,93.5 C 45,95.2 47,96 50,96 C 54,96 56.5,94.5 56.5,92 C 56.5,89.8 55,88.5 51,87.8 C 47.5,87.2 46.5,86.5 46.5,85.2 C 46.5,84 48,83 50,83 C 52.5,83 54,84 55,85.2 L 57,82.5 C 55.5,80.8 53,80 50,80 C 46,80 43,81.8 43,84.8 C 43,87.2 44.5,88.5 48.5,89.2 C 52,89.8 53,90.5 53,91.8 C 53,93.2 51.5,94.2 49.5,94.2 C 47,94.2 45.5,93 44.5,91.5 Z" />
+    <path d="M 61,80 L 75,80 L 75,83.5 L 70,83.5 L 70,96 L 66,96 L 66,83.5 L 61,83.5 Z" />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M 88,80 C 93.5,80 97.5,83.5 97.5,88 C 97.5,92.5 93.5,96 88,96 C 82.5,96 78.5,92.5 78.5,88 C 78.5,83.5 82.5,80 88,80 Z M 88,83.5 C 85,83.5 82.5,85.5 82.5,88 C 82.5,90.5 85,92.5 88,92.5 C 91,92.5 93.5,90.5 93.5,88 C 93.5,85.5 91,83.5 88,83.5 Z"
+    />
+  </g>
+</svg>
